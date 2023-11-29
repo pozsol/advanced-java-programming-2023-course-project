@@ -47,7 +47,7 @@ public class CitizenController {
         return citizenRepository.findById(id).get();
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_VIEWER"})
     @GetMapping(value = "/{id}/pdf")
     public ResponseEntity<byte[]> getCitizenPdfById(@PathVariable long id) throws DocumentException, IOException {
 
