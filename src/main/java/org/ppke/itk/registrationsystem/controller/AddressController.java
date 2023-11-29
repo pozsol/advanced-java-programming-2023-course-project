@@ -15,7 +15,7 @@ public class AddressController {
 
     private final AddressRepository addressRepository;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_VIEWER"})
     @GetMapping()
     public List<Address> getAllAddresses() {
         return addressRepository.findAll();

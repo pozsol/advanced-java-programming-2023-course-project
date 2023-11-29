@@ -15,7 +15,7 @@ public class BankAccountController {
 
     private final BankAccountRepository bankAccountRepository;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_VIEWER"})
     @GetMapping()
     public List<BankAccount> getAllBankAccounts() {
         return bankAccountRepository.findAll();

@@ -32,10 +32,10 @@ public class WebSecurityConfiguration {
         httpSecurity.csrf(csrf -> csrf.disable());
 
         httpSecurity.authorizeHttpRequests(auth -> auth
-                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(antMatcher(HttpMethod.GET)).hasAnyRole("ADMIN", "VIEWER")
+                        .requestMatchers(antMatcher(HttpMethod.POST)).hasRole("ADMIN")
+                        .requestMatchers(antMatcher(HttpMethod.PUT)).hasRole("ADMIN")
                         .requestMatchers(antMatcher(HttpMethod.DELETE)).hasRole("ADMIN")
-                        .requestMatchers(antMatcher("/teams/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(antMatcher("/groups/**")).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -63,5 +63,4 @@ public class WebSecurityConfiguration {
                 .passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
-
 }

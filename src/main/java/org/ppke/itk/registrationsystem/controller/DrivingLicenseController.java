@@ -15,7 +15,7 @@ public class DrivingLicenseController {
 
     private final DrivingLicenseRepository drivingLicenseRepository;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_VIEWER"})
     @GetMapping()
     public List<DrivingLicense> getAllDrivingLicenses() {
         return drivingLicenseRepository.findAll();

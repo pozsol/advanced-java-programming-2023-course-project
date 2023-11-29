@@ -26,7 +26,7 @@ public class CitizenController {
 
     private final CitizenRepository citizenRepository;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_VIEWER"})
     @GetMapping()
     public List<Citizen> getAllCitizens(@RequestParam(required = false, defaultValue = "100") int limit,
                                         @RequestParam(required = false, defaultValue = "asc") String sort) {
